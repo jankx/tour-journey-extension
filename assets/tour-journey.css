@@ -101,3 +101,33 @@
         height: 15px;
     }
 }
+
+/* Destination-count block (số điểm đến sẽ tham quan) */
+.tj-destination-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.9rem;
+    background: rgba(101, 163, 13, 0.1);
+    border: 1px solid rgba(101, 163, 13, 0.35);
+    border-radius: 999px;
+    color: #365314;
+    line-height: 1.2;
+}
+
+.tj-destination-count__icon {
+    display: inline-flex;
+    align-items: center;
+}
+
+.tj-destination-count__value {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #65a30d;
+    font-variant-numeric: tabular-nums;
+}
+
+.tj-destination-count__label {
+    font-size: 0.9rem;
+    font-weight: 600;
+}

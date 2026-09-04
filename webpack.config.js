@@ -22,6 +22,7 @@ module.exports = {
         'blocks/tour-journey-destination/build/index': './blocks/tour-journey-destination/src/index.tsx',
         'blocks/tour-journey-time/build/index': './blocks/tour-journey-time/src/index.tsx',
         'blocks/tour-journey-details/build/index': './blocks/tour-journey-details/src/index.tsx',
+        'blocks/tour-journey-destination-count/build/index': './blocks/tour-journey-destination-count/src/index.tsx',
     },
 
     output: {

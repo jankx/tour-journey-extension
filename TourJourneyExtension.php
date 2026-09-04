@@ -5,6 +5,7 @@ use Jankx\Extensions\AbstractExtension;
 use Jankx\Extensions\TourJourney\PostTypes\JourneyPostType;
 use Jankx\Extensions\TourJourney\Admin\JourneyBuilderMetabox;
 use Jankx\Extensions\TourJourney\Blocks\TourJourneyBlock;
+use Jankx\Extensions\TourJourney\Blocks\TourJourneyDestinationCountBlock;
 
 class TourJourneyExtension extends AbstractExtension
 {
@@ -101,6 +102,13 @@ class TourJourneyExtension extends AbstractExtension
 
             if ($blockName === 'jankx/tour-journey' && !\WP_Block_Type_Registry::get_instance()->is_registered($blockName)) {
                 $block = new TourJourneyBlock($blockDir);
+                $block->boot();
+                $block->register();
+                continue;
+            }
+
+            if ($blockName === 'jankx/tour-journey-destination-count' && !\WP_Block_Type_Registry::get_instance()->is_registered($blockName)) {
+                $block = new TourJourneyDestinationCountBlock($blockDir);
                 $block->boot();
                 $block->register();
                 continue;
