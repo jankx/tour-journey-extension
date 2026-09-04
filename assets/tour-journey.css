@@ -1,0 +1,103 @@
+/* Tour Journey timeline - frontend & editor */
+
+.tj-timeline {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Vertical line */
+.tj-timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 16px;               /* aligns with the dot */
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, #65a30d, #365314);
+    border-radius: 2px;
+}
+
+/* Each stop sits on the line */
+.tj-timeline .wp-block-group.tj-stop,
+.tj-timeline .tj-stop {
+    position: relative;
+    margin: 0 0 1.5rem;
+    padding-left: 48px;       /* room for the dot + line */
+}
+
+/* Dot marker */
+.tj-timeline .tj-stop::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    border: 4px solid #65a30d;
+    box-shadow: 0 0 0 3px rgba(101, 163, 13, 0.2);
+    box-sizing: border-box;
+}
+
+/* First stop: dot emphasized */
+.tj-timeline .tj-stop:first-child::before {
+    background: #65a30d;
+    border-color: #fff;
+    box-shadow: 0 0 0 3px rgba(101, 163, 13, 0.35);
+}
+
+/* Child block pieces */
+.tj-timeline .tj-time {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #65a30d;
+    background: rgba(101, 163, 13, 0.12);
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    margin: 0 0 0.4rem;
+}
+
+.tj-timeline .tj-destination {
+    margin: 0 0 0.5rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #131316;
+}
+
+.tj-timeline .tj-details {
+    color: #4a4a55;
+    line-height: 1.65;
+}
+
+.tj-timeline .tj-details p {
+    margin: 0 0 0.6rem;
+}
+
+/* Editor: subtle background so nested blocks are visible */
+.tj-timeline--editor .tj-stop {
+    padding: 0.75rem 0.75rem 0.75rem 48px;
+    border: 1px dashed #d8dee8;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 640px) {
+    .tj-timeline::before {
+        left: 12px;
+    }
+    .tj-timeline .wp-block-group.tj-stop,
+    .tj-timeline .tj-stop {
+        padding-left: 40px;
+    }
+    .tj-timeline .tj-stop::before {
+        left: 6px;
+        width: 15px;
+        height: 15px;
+    }
+}

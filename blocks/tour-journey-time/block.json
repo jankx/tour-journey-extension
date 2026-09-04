@@ -1,0 +1,22 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "jankx/tour-journey-time",
+    "title": "Thời gian (Journey)",
+    "category": "jankx",
+    "icon": "clock",
+    "description": "Block con hiển thị thời gian (ví dụ Ngày 1, Đêm 1) của một chặng hành trình trên timeline.",
+    "textdomain": "jankx",
+    "parent": ["jankx/tour-journey"],
+    "supports": {
+        "html": false
+    },
+    "attributes": {
+        "content": {
+            "type": "string",
+            "source": "html",
+            "selector": ".tj-time"
+        }
+    },
+    "editorScript": "file:./build/index.js"
+}

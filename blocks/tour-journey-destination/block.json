@@ -1,0 +1,22 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "jankx/tour-journey-destination",
+    "title": "Điểm đến (Journey)",
+    "category": "jankx",
+    "icon": "location",
+    "description": "Block con hiển thị điểm đến của một chặng hành trình trên timeline.",
+    "textdomain": "jankx",
+    "parent": ["jankx/tour-journey"],
+    "supports": {
+        "html": false
+    },
+    "attributes": {
+        "content": {
+            "type": "string",
+            "source": "html",
+            "selector": ".tj-destination"
+        }
+    },
+    "editorScript": "file:./build/index.js"
+}

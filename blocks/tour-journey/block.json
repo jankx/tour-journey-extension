@@ -1,0 +1,20 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "jankx/tour-journey",
+    "title": "Tour Journey (Hành trình timeline)",
+    "category": "jankx",
+    "icon": "timeline",
+    "description": "Hiển thị hành trình tour dạng timeline. Tự động sinh các block con (Điểm đến, Thời gian, Chi tiết) từ dữ liệu hành trình, cho phép tuỳ biến nội dung và vị trí.",
+    "textdomain": "jankx",
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"],
+        "spacing": {
+            "margin": true,
+            "padding": true
+        }
+    },
+    "attributes": {},
+    "editorScript": "file:./build/index.js"
+}

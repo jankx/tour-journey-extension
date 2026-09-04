@@ -38,7 +38,7 @@ class JourneyPostType
             'capability_type' => 'post',
             'has_archive' => true,
             'hierarchical' => false,
-            'menu_position' => 21,
+            'menu_position' => 18,
             'menu_icon' => 'dashicons-location',
             'supports' => ['title', 'editor', 'thumbnail', 'excerpt'],
             'show_in_rest' => false,
@@ -49,6 +49,11 @@ class JourneyPostType
         // Register the destination taxonomy to this post type if it is registered by travel extension
         if (taxonomy_exists('destination')) {
             register_taxonomy_for_object_type('destination', self::POST_TYPE);
+        }
+
+        if (!get_option('jankx_tour_journey_flush_rewrite')) {
+            flush_rewrite_rules();
+            update_option('jankx_tour_journey_flush_rewrite', 1);
         }
     }
 }

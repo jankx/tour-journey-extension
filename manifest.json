@@ -16,5 +16,10 @@
     "requirements": {
         "php": ">=7.4"
     },
+    "dependencies": {
+        "extensions": [
+            "travel"
+        ]
+    },
     "auto_activate": true
 }

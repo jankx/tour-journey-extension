@@ -1,0 +1,22 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "jankx/tour-journey-details",
+    "title": "Chi tiết (Journey)",
+    "category": "jankx",
+    "icon": "text",
+    "description": "Block con hiển thị thông tin chi tiết của một chặng hành trình trên timeline.",
+    "textdomain": "jankx",
+    "parent": ["jankx/tour-journey"],
+    "supports": {
+        "html": false
+    },
+    "attributes": {
+        "content": {
+            "type": "string",
+            "source": "html",
+            "selector": ".tj-details"
+        }
+    },
+    "editorScript": "file:./build/index.js"
+}
