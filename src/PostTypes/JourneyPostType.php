@@ -34,14 +34,14 @@ class JourneyPostType
             'show_ui' => true,
             'show_in_menu' => true,
             'query_var' => true,
-            'rewrite' => ['slug' => 'hanh-trinh'],
+            'rewrite' => ['slug' => 'journey'],
             'capability_type' => 'post',
             'has_archive' => true,
             'hierarchical' => false,
-            'menu_position' => 30,
+            'menu_position' => 21,
             'menu_icon' => 'dashicons-location',
             'supports' => ['title', 'editor', 'thumbnail', 'excerpt'],
-            'show_in_rest' => true,
+            'show_in_rest' => false,
         ];
 
         register_post_type(self::POST_TYPE, $args);

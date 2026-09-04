@@ -84,26 +84,27 @@
             reorderItems(); // Re-read DOM values and save to state
         });
 
-        // Sync with Gutenberg Taxonomy Panel
-        function syncWithTaxonomies() {
-            if (!wp || !wp.data) return;
+        // Sync with Classic Editor Taxonomy Panel
+        function syncWithClassicTaxonomies() {
+            // Danh sách checkbox của taxonomy destination
+            const $destinationCheckboxes = $('#destinationdiv input[type="checkbox"]');
 
-            // Subscribe to Gutenberg store changes
-            wp.data.subscribe(function () {
-                const isSavingPost = wp.data.select('core/editor').isSavingPost();
-                const isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
+            if (!$destinationCheckboxes.length) return;
 
-                if (isSavingPost || isAutosavingPost) return; // Don't disrupt during saving
+            function updateFromCheckboxes() {
+                let newSelectedIds = [];
+                let termsMap = {};
 
-                // Get selected destinations
-                // destination might be registered as an array of IDs in post meta or core terms
-                const editedPost = wp.data.select('core/editor').getEditedPostAttribute('destination');
+                $destinationCheckboxes.each(function () {
+                    if ($(this).is(':checked')) {
+                        const val = parseInt($(this).val());
+                        if (val > 0) {
+                            newSelectedIds.push(val);
+                            termsMap[val] = $(this).parent().text().trim();
+                        }
+                    }
+                });
 
-                if (editedPost === undefined) return; // destination taxonomy might not be loaded yet
-
-                let newSelectedIds = Array.isArray(editedPost) ? editedPost : [];
-
-                // Compare with current
                 let hasChanged = false;
                 if (newSelectedIds.length !== currentSelectedTermIds.length) {
                     hasChanged = true;
@@ -118,24 +119,20 @@
 
                 if (hasChanged) {
                     currentSelectedTermIds = [...newSelectedIds];
-
-                    // Fetch term names
-                    if (currentSelectedTermIds.length > 0) {
-                        wp.apiFetch({ path: '/wp/v2/destination?include=' + currentSelectedTermIds.join(',') })
-                            .then(function (terms) {
-                                reconcileItems(terms);
-                            });
-                    } else {
-                        reconcileItems([]);
-                    }
+                    reconcileItemsClassic(termsMap);
                 }
+            }
+
+            // Gắn event listener
+            $destinationCheckboxes.on('change', function () {
+                updateFromCheckboxes();
             });
+
+            // Khởi chạy lần đầu tiên
+            updateFromCheckboxes();
         }
 
-        function reconcileItems(terms) {
-            let termsMap = {};
-            terms.forEach(t => termsMap[t.id] = t.name);
-
+        function reconcileItemsClassic(termsMap) {
             // 1. Add new terms that don't exist in itinerary
             currentSelectedTermIds.forEach(id => {
                 const exists = itineraryItems.find(item => parseInt(item.term_id) === parseInt(id));
@@ -149,27 +146,17 @@
                 }
             });
 
-            // 2. We do NOT auto-remove items. If user deselects, they will be marked as "is-orphaned".
-            // That allows users to manually fix it if they accidentally unchecked. 
-            // Or we just re-render to update the "is-orphaned" visual state.
-
             // Re-render
             renderBuilder();
         }
 
-        // Wait a bit for Gutenberg data to be ready
+        // Khởi động
         setTimeout(function () {
-            syncWithTaxonomies();
-
-            // Initial render
-            // Try to extract initial terms from WP Data to set currentSelectedTermIds initially
-            if (wp && wp.data) {
-                const initialTerms = wp.data.select('core/editor').getEditedPostAttribute('destination');
-                if (Array.isArray(initialTerms)) {
-                    currentSelectedTermIds = [...initialTerms];
-                }
+            if ($('#destinationdiv').length) {
+                syncWithClassicTaxonomies();
+            } else {
+                renderBuilder();
             }
-            renderBuilder();
-        }, 1000);
+        }, 500);
     });
 })(jQuery);
