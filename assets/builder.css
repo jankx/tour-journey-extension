@@ -1,0 +1,88 @@
+/* Journey Builder Metabox CSS */
+.jankx-journey-builder {
+    padding: 10px 0;
+}
+
+.journey-builder-desc {
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background: #f0f6fc;
+    border-left: 4px solid #72aee6;
+}
+
+.journey-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.journey-item {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+}
+
+.journey-item-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: #f6f7f7;
+    border-bottom: 1px solid #c3c4c7;
+    cursor: move;
+}
+
+.journey-item-handle {
+    margin-right: 15px;
+    cursor: move;
+    color: #8c8f94;
+}
+
+.journey-item-title {
+    font-weight: 600;
+    margin: 0;
+}
+
+.journey-item-body {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.journey-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.journey-field label {
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.journey-field input[type="text"],
+.journey-field textarea {
+    width: 100%;
+    max-width: 100%;
+}
+
+.journey-item-remove {
+    margin-left: auto;
+    color: #d63638;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.journey-item-remove:hover {
+    color: #b32d2e;
+    text-decoration: underline;
+}
+
+/* For items added that are not in selected terms */
+.journey-item.is-orphaned {
+    border-color: #d63638;
+}
+.journey-item.is-orphaned .journey-item-header {
+    background: #fcf0f1;
+}

@@ -1,0 +1,20 @@
+{
+    "name": "Tour Journey",
+    "version": "1.0.0",
+    "description": "Extension tạo post type Hành trình (tour_journey), cho phép sắp xếp lịch trình di chuyển qua các điểm đến với builder tự động động sinh từ taxonomy.",
+    "author": "Jankx",
+    "extension_id": "tour-journey",
+    "context": [
+        "admin",
+        "frontend"
+    ],
+    "caller": {
+        "file": "TourJourneyExtension.php",
+        "class": "Jankx\\Extensions\\TourJourney\\TourJourneyExtension",
+        "method": "init"
+    },
+    "requirements": {
+        "php": ">=7.4"
+    },
+    "auto_activate": true
+}
