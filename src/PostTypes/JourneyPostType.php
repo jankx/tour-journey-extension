@@ -8,6 +8,16 @@ class JourneyPostType
     public function register(): void
     {
         add_action('init', [$this, 'registerPostType'], 15);
+        add_filter('use_block_editor_for_post_type', [$this, 'disableBlockEditor'], 10, 2);
+    }
+
+    public function disableBlockEditor($use_block_editor, $post_type)
+    {
+        if ($post_type === self::POST_TYPE) {
+            return false;
+        }
+
+        return $use_block_editor;
     }
 
     public function registerPostType(): void
@@ -41,7 +51,7 @@ class JourneyPostType
             'menu_position' => 18,
             'menu_icon' => 'dashicons-location',
             'supports' => ['title', 'editor', 'thumbnail', 'excerpt'],
-            'show_in_rest' => false,
+            'show_in_rest' => true,
         ];
 
         register_post_type(self::POST_TYPE, $args);
