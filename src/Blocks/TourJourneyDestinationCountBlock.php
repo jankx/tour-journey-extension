@@ -1,14 +1,18 @@
 <?php
 namespace Jankx\Extensions\TourJourney\Blocks;
 
+use Jankx\Extensions\TourJourney\Admin\JourneyBuilderMetabox;
+
 /**
  * "Số điểm đến (Journey)" block.
  *
- * Counts the number of unique "destination" taxonomy terms that are assigned
- * to the current journey post, so visitors know how many places will be
- * visited on the tour. Because the count must reflect the live post-terms
- * relationship, this is a server-rendered (dynamic) block — the editor only
- * shows a placeholder.
+ * Counts the number of stops in the journey's itinerary (the
+ * "_jankx_journey_itinerary" post meta managed by the Journey Builder
+ * metabox), so visitors know how many places will be visited on the tour.
+ *
+ * Because the count must reflect the live itinerary, this is a
+ * server-rendered (dynamic) block — the editor reuses the server render
+ * via ServerSideRender so it matches the frontend.
  */
 class TourJourneyDestinationCountBlock extends Block
 {
@@ -45,9 +49,13 @@ class TourJourneyDestinationCountBlock extends Block
         $count = 0;
 
         if ($postId) {
-            $terms = wp_get_object_terms($postId, 'destination', ['fields' => 'ids']);
-            if (!is_wp_error($terms)) {
-                $count = count(array_unique(array_map('intval', $terms)));
+            $itinerary = get_post_meta($postId, JourneyBuilderMetabox::META_KEY, true);
+            if (is_array($itinerary)) {
+                foreach ($itinerary as $stop) {
+                    if (is_array($stop) && !empty($stop['name'])) {
+                        $count++;
+                    }
+                }
             }
         }
 
