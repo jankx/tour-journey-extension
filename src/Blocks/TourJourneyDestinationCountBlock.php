@@ -59,21 +59,36 @@ class TourJourneyDestinationCountBlock extends Block
             }
         }
 
+        $iconText = isset($attributes['icon']) ? trim((string) $attributes['icon']) : '';
+        if ($iconText === '') {
+            $iconText = '📍';
+        }
+
+        $label = isset($attributes['label']) ? trim((string) $attributes['label']) : '';
+        if ($label === '') {
+            $label = __('điểm đến sẽ tham quan', 'jankx');
+        }
+
+        $showIcon = array_key_exists('showIcon', $attributes) ? (bool) $attributes['showIcon'] : true;
+        $showLabel = array_key_exists('showLabel', $attributes) ? (bool) $attributes['showLabel'] : true;
+
         $wrapper_attributes = get_block_wrapper_attributes(['class' => 'tj-destination-count']);
 
-        $icon = sprintf(
-            '<span class="tj-destination-count__icon" aria-hidden="true">%s</span>',
-            esc_html('📍')
-        );
+        $parts = '';
 
-        $html = '<div %s>%s<span class="tj-destination-count__value">%d</span><span class="tj-destination-count__label">%s</span></div>';
+        if ($showIcon) {
+            $parts .= sprintf(
+                '<span class="tj-destination-count__icon" aria-hidden="true">%s</span>',
+                esc_html($iconText)
+            );
+        }
 
-        return sprintf(
-            $html,
-            $wrapper_attributes,
-            $icon,
-            $count,
-            esc_html__('điểm đến sẽ tham quan', 'jankx')
-        );
+        $parts .= sprintf('<span class="tj-destination-count__value">%d</span>', $count);
+
+        if ($showLabel) {
+            $parts .= sprintf('<span class="tj-destination-count__label">%s</span>', esc_html($label));
+        }
+
+        return sprintf('<div %s>%s</div>', $wrapper_attributes, $parts);
     }
 }

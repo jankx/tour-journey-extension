@@ -112,22 +112,32 @@
     border: 1px solid rgba(101, 163, 13, 0.35);
     border-radius: 999px;
     color: #365314;
+    font-size: 1rem;
     line-height: 1.2;
 }
 
 .tj-destination-count__icon {
     display: inline-flex;
     align-items: center;
+    font-size: 1em;
 }
 
 .tj-destination-count__value {
-    font-size: 1.35rem;
+    font-size: 1.5em;
     font-weight: 800;
     color: #65a30d;
     font-variant-numeric: tabular-nums;
 }
 
 .tj-destination-count__label {
-    font-size: 0.9rem;
+    font-size: 0.9em;
     font-weight: 600;
+}
+
+/* When the editor/user picks a custom text colour, let the whole pill
+   (including the number) inherit it instead of the default green. */
+.tj-destination-count.has-text-color,
+.tj-destination-count.has-text-color .tj-destination-count__value,
+.tj-destination-count.has-text-color .tj-destination-count__label {
+    color: inherit;
 }
